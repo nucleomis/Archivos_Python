@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'padre.html' %}
+
+{% load static %}<!--cargo la carpeta con el nombre static con el estilo que le voy a aplicar a la pagina-->
+
+    <!-- Bootstrap -->
+    <link href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%} "rel="stylesheet">
+        <!--en el href agregue {% static '' %} con la direccion dentro de static -->
+
+     <!-- Fonts -->
+    
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+     
+
+    <!-- Styles -->
+    <link href="{%static '/css/gestion.css'%} "rel="stylesheet">
+
+
+
+<html lang="es">
+        
+    {% block titulo %}
+        servicio
+    {% endblock titulo %}
+
+    {% block contenido %}
+        {% for servicio in servicios  %}
+                        <!-- Heading -->
+            <section class="page-section clearfix">
+                <div class="container">
+                <div class="intro">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{servicio.imagen.url}}" alt="" style= "width: 50%;">
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded" style = "left: 600px;">
+                    <h2 class="section-heading mb-4" >
+                        <span class="section-heading-lower" style="color:cyan">{{servicio.titulo}}</span>
+                        <span class="section-heading-upper">{{servicio.contenido}}</span>
+                    </h2>
+                    </p>
+                    
+                    </div>
+                </div>
+                </div>
+            </section>
+
+        {% endfor %}
+    {% endblock contenido %}

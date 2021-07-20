@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'padre.html' %}
+<html lang="es">
+        
+    {% block title %}
+        contacto
+    {% endblock title %}
+
+<body>
+    {% block contenido %}
+    {% if "enviado" in request.GET %}
+        <h2 style= "color: white; text-align: center;">mensaje enviado correctamente, gracias!</h2>
+    
+    {% else %}
+        {% if "fallo" in request.GET %}
+            <h2 style= "color: white; text-align: center;">ERROR AL ENVIAR EL MENSAJE, INTENTE NUEVAMENTE</h2>
+        {% endif %}
+    
+    {% endif %}
+    <div class="ContenedorFormulario">
+        <form action="", method="POST" style="text-align: center;">{%csrf_token%}
+            <table style="color: white;">{{formulario.as_table}}</table>
+            <input type="submit" value="enviar" style="padding: 0px 55px;">            
+        </form>
+    </div>
+    {% endblock contenido %}
+</body>

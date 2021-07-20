@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends 'padre.html' %}
+
+{% load static %}<!--cargo la carpeta con el nombre static con el estilo que le voy a aplicar a la pagina-->
+
+    <!-- Bootstrap -->
+    <link href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%} "rel="stylesheet">
+        <!--en el href agregue {% static '' %} con la direccion dentro de static -->
+
+     <!-- Fonts -->
+    
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+     
+
+    <!-- Styles -->
+    <link href="{%static '/css/gestion.css'%} "rel="stylesheet">
+
+
+
+<html lang="es">
+        
+    {% block titulo %}
+        servicio
+    {% endblock titulo %}
+
+    {% block contenido %}
+        {% for post in posts  %}
+                        <!-- Heading -->
+            <section class="page-section clearfix">
+                <div class="container">
+                <div class="intro">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{post.imagen.url}}" alt="" style= "width: 50%;">
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded" style = "left: 600px;">
+                    <h2 class="section-heading mb-4" >
+                        <span class="section-heading-lower" style="color:cyan">{{post.titulo}}</span>
+                        <span class="section-heading-upper">{{post.contenido}}</span>
+                    </h2>
+                    <h3 Style= "text-align: left; font-size: 70%;">
+                        <span class="section-heading-upper">Autor:    
+                            <a href={% url 'autor' post.autor.id %} style="color: rgb(170, 206, 240)">  {{post.autor}} </a><br></span>
+                        <span class="section-heading-upper">Categoria: 
+                            {% for cat in post.categorias.all %}
+                                <a href={% url 'categoria' cat.id %} style="color: rgb(170, 206, 240)">  {{cat.nombre}} </a>
+                            {% endfor %}
+                        </span>
+                    </h3>
+                    </p>
+                    
+                    </div>
+                </div>
+                </div>
+            </section>
+
+        {% endfor %}
+
+        <section>
+            <div style= "width: 85%; margin: auto; text-align: center; color: white;">
+                Categorias: 
+                {% for post in posts %}
+                    {%for cat in post.categorias.all%}
+                        <a href={% url 'categoria' cat.id %} style="color: rgb(170, 206, 240)">  {{cat.nombre}} </a>| 
+                    {% endfor %}
+                {% endfor %}
+
+            </div>
+            <div style= "width: 85%; margin: auto; text-align: center; color: white;">
+            </div>
+
+        </section>
+
+    {% endblock contenido %}

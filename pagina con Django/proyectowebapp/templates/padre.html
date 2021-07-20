@@ -1,0 +1,128 @@
+<html>
+
+<head>
+  <title>
+    {% block titulo %}{% endblock titulo %}
+  </title>
+{% load static %}<!--cargo la carpeta con el nombre static con el estilo que le voy a aplicar a la pagina-->
+
+    <!-- Bootstrap -->
+    <link href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%} "rel="stylesheet">
+        <!--en el href agregue {% static '' %} con la direccion dentro de static donde se encuentra el css de Bootstrap -->
+
+     <!-- Fonts -->
+    
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+     
+
+    <!-- Styles -->
+    <link href="{%static '/css/gestion.css'%} "rel="stylesheet">
+</head>
+
+<body>
+    <h1 style="font-family: 'Courier New', Courier, monospace; font-size: 5px;" id="titulo" class="site-heading text-center text-info d-none d-lg-block">
+      Nucleo Sistemas
+    </h1>
+
+ <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="home.html">Gestión de Pedidos</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+          {% if request.path == '/proyecto/' %}
+            <li class="nav-item active px-lg-4">
+          {%else%}
+            <li class="nav-item px-lg-4">
+          {% endif %}
+          <!--primera forma u opcion logica-->
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'inicio' %} ">Inicio</a>
+                        <!--arriba hay un ejemplo de como usando el metodo "%url ''%" podemos llamar a la direccio 
+                        urlpatters de urls.py-->
+          </li>
+          <li class="nav-item {% if request.path == '/servicio/servicios/' %}active{% endif %} px-lg-4">
+            <!--opcion 2 logica-->
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'servicios' %}">Servicios</a>
+          </li>
+          <li class="nav-item {% if request.path == '/tienda/' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'tienda' %}">Tienda</a>
+          </li>
+          <li class="nav-item {% if request.path == '/contacto/' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'contacto' %}">Contacto</a>
+          </li>
+          <li class="nav-item {% if request.path == '/blog/' %}active{% endif %} px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'blog' %}">Blog</a>
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+   {% block contenido %}
+   
+   {% endblock %}
+
+
+    <!-- Footer -->
+    <footer class="footer text-faded text-center py-5">
+      <div class="container">
+        <p class="m-0">
+	        <a href="#" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+	        <a href="#" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+	        <a href="#" class="link">
+	          <span class="fa-stack fa-lg">
+	            <i class="fa fa-circle fa-stack-2x"></i>
+	            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+	          </span>
+	        </a>
+	    </p>
+        <p class="m-0 mbt">
+        	<a href="sample.html" class="link">Política de privacidad</a> ·
+        	<a href="sample.html" class="link">Aviso legal</a> ·
+        	<a href="sample.html" class="link">Cookies</a>
+		</p>
+        <p class="m-0 mbt1">&copy; Nucleo Sistemas 2021</p>
+      </div>
+	</footer>
+
+    <!-- Bootstrap -->
+    <script src="{%static '/jquery/jquery.min.js'%}"></script>
+    <script src="{%static '/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <!--scrip local-->
+    <script>
+      var texto = document.getElementById("titulo");
+      var control = 5;
+      animartexto = ()=>{
+        setTimeout(//con este metodo animamos 1 sola vez por evento o clic
+            function(){//para podes agregar intervalos hay que crear otra funcion dentro de la que llamamos para que el intervalo llame a esta
+                control ++;
+                if(control<50){
+                  texto.style.fontSize= control+"px";
+                  animartexto();
+                }
+            },15//este es el segundo parametro que recive la funcnion setTimeout como intervalo de tiempo
+        )
+    }
+    onload = animartexto();
+    </script>
+
+</body>
+
+
+</html>

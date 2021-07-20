@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends 'padre.html' %}
+
+{% load static %}<!--cargo la carpeta con el nombre static con el estilo que le voy a aplicar a la pagina-->
+
+    <!-- Bootstrap -->
+    <link href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%} "rel="stylesheet">
+        <!--en el href agregue {% static '' %} con la direccion dentro de static -->
+
+     <!-- Fonts -->
+    
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+     
+
+    <!-- Styles -->
+    <link href="{%static '/css/gestion.css'%} "rel="stylesheet">
+
+
+
+<html lang="es">
+        
+    {% block titulo %}
+        descripcion
+    {% endblock titulo %}
+
+    {% block contenido %}
+        <h1>descripcion</h1>
+    {% endblock contenido %}

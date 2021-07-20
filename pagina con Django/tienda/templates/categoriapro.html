@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% extends 'padre.html' %}
+
+{% load static %}<!--cargo la carpeta con el nombre static con el estilo que le voy a aplicar a la pagina-->
+
+    <!-- Bootstrap -->
+    <link href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%} "rel="stylesheet">
+        <!--en el href agregue {% static '' %} con la direccion dentro de static -->
+
+     <!-- Fonts -->
+    
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+     
+
+    <!-- Styles -->
+    <link href="{%static '/css/gestion.css'%} "rel="stylesheet">
+
+
+
+<html lang="es">
+        
+    {% block titulo %}
+        servicio
+    {% endblock titulo %}
+
+    {% block contenido %}
+        <div class="float-right ;">
+                <p style="color: white; font-size: 200%;">carro de compras</p>
+        </div>
+      {% for prod in producto %}
+                        <!-- Heading -->
+            <section class="page-section clearfix">
+                <div class="container">
+                <div class="intro">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{prod.imagen.url}}" alt="" style= "width: 50%;">
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded" style = "left: 600px;">
+                    <h2 class="section-heading mb-4" >
+                        <span class="section-heading-lower" style="color:cyan">{{prod.nombre}}</span>
+                        <span class="section-heading-upper">${{prod.precio}}</span>
+                    </h2>
+                    <h3>disponible:</h3>
+                        {%if prod.disponible == True%}
+                            <span class="section-heading-upper"> <h4 style="color: green;">SI</h3></span>
+                        {% else %}
+                            <span class="section-heading-upper"> <h4 style="color: red;">NO</h3></span>
+                        {% endif %}
+                    </h3>
+                   
+                    <h3 Style= "text-align: left; font-size: 70%;">
+                        <span class="section-heading-upper">Categoria: 
+                            {{prod.categoria.nombre}}
+                        </span>
+                    </h3>
+
+                    </div>
+                </div>
+                </div>
+            </section>
+        {% endfor %}
+        <section>
+            <div style= "width: 85%; margin: auto; text-align: center; color: white;">
+                Categorias: 
+                
+                {%for cat in categorias%}
+                    <a href={% url 'categoriapro' cat.id %} style="color: rgb(170, 206, 240)">  {{cat.nombre}} </a>| 
+                {% endfor %}
+                
+
+            </div>
+            <div style= "width: 85%; margin: auto; text-align: center; color: white;">
+            </div>
+
+        </section>
+            <div style= "width: 85%; margin: auto; text-align: center; color: white;">
+                <a href={% url 'tienda' %} style="color: rgb(170, 206, 240)">  VOLVER </a> 
+            </div>
+        <section>
+
+        </section>
+    {% endblock contenido %}

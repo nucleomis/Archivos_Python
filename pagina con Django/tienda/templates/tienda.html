@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends 'padre.html' %}
+
+{% load static %}<!--cargo la carpeta con el nombre static con el estilo que le voy a aplicar a la pagina-->
+
+    <!-- Bootstrap -->
+    <link href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%} "rel="stylesheet">
+        <!--en el href agregue {% static '' %} con la direccion dentro de static -->
+
+     <!-- Fonts -->
+    
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+     
+
+    <!-- Styles -->
+    <link href="{%static '/css/gestion.css'%} "rel="stylesheet">
+
+
+
+<html lang="es">
+        
+    {% block titulo %}
+        TIENDA
+    {% endblock titulo %}
+
+    {% block contenido %}
+        <div class="float-right ;">
+            <p style="color: white; font-size: 200%; text-align: center;">total en el carro:<br> ${{importe_total_carro}}</p>
+        </div>
+        
+        <div class="row">
+
+            {% for prod in posts  %}
+
+            <div class="col-md-3">
+                <div class= "card" style="width:100%; margin: 5px 5px;">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{prod.imagen.url}}" alt="" style= "width: 80%;">
+                                
+                    <h5 class="section-heading mb-4" style="text-align:center">
+                        <span class="section-heading-lower" style="color:rgb(0, 2, 2); font-size:100%">{{prod.nombre}}</span>
+                    disponible:</h5>
+                    {%if prod.disponible == True%}
+                        <span class="section-heading-upper"><h5 style ="color:rgb(126, 128, 0); text-align:center"> SI</span>
+                    {% else %}
+                        <span class="section-heading-upper"><h5 style ="color:red; text-align:center"> NO</span>
+                    {% endif %}
+                        </h5>
+                    <h2>
+                        <span class="section-heading-upper">${{prod.precio}}</span>
+                    </h2>
+                    <h3 Style= "text-align: left; font-size: 110%;">
+                        <span class="section-heading-upper">Categoria: 
+                        <a href={% url 'categoriapro' prod.categoria.id %} style="color: blue; font-size: 110%">
+                            {{prod.categoria.nombre}} 
+                        </a>
+                        </span>
+                    </h3>
+                    <div class="card-footer text-center">
+                        <img src="{%static 'img\carrito.jpg'%}" style="width: 7%; margin: 0% 45%;" alt="carrito">
+                        <a href="#" class="btn btn-success" style="background-color: blue;">agregar al carrito</a>  
+                    </div>
+        
+                </div> 
+            </div>      
+            {% endfor %}
+    </div>
+    </div>
+        <section>
+            <div style= "width: 85%; margin: auto; text-align: center; color: white;">
+                Categorias: 
+                {%for cat in posts%}
+                    <a href={% url 'categoriapro' cat.categoria.id %} style="color: rgb(170, 206, 240)">  {{cat.categoria.nombre}} </a>| 
+                {% endfor %}
+                
+
+            </div>
+            <div style= "width: 85%; margin: auto; text-align: center; color: white;">
+            </div>
+            
+        </section>
+
+    {% endblock contenido %}
